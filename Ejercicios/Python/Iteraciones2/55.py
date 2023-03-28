@@ -21,9 +21,9 @@ def productoAComprar(producto,dinero):
 		listaProductosComprados()
 		comprar(dinero)
 	else:
-		insuficienteDinero(dinero)
+		insuficienteDinero(producto,dinero)
 		
-def insuficienteDinero(dinero):			
+def insuficienteDinero(producto,dinero):			
 	print("\nNo tienes suficiente dinero para comprar el producto.\nTe faltan",precioProductos[producto-1]-dinero,"\n")
 	listaProductosComprados()
 	opcion=str(input("\n¿Desea ingresar más dinero? [SI/NO]\n"))
