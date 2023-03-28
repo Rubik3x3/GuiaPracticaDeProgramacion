@@ -21,16 +21,19 @@ def productoAComprar(producto,dinero):
 		listaProductosComprados()
 		comprar(dinero)
 	else:
-		print("\nNo tienes suficiente dinero para comprar el producto.\nTe faltan",precioProductos[producto-1]-dinero,"\n")
-		listaProductosComprados()
-		opcion=str(input("\n¿Desea ingresar más dinero? [SI/NO]\n"))
-		if opcion == "SI":
-			ingresarDinero(dinero)
-		elif opcion == "NO":
-			print("\nOk, saliste del programa.")
-			exit()
-		else:
-			print("\nIngrese una opción válida.")
+		insuficienteDinero(dinero)
+		
+def insuficienteDinero(dinero):			
+	print("\nNo tienes suficiente dinero para comprar el producto.\nTe faltan",precioProductos[producto-1]-dinero,"\n")
+	listaProductosComprados()
+	opcion=str(input("\n¿Desea ingresar más dinero? [SI/NO]\n"))
+	if opcion == "SI":
+		ingresarDinero(dinero)
+	elif opcion == "NO":
+		print("\nOk, saliste del programa.")
+		exit()
+	else:
+		print("\nIngrese una opción válida.")
 
 def comprarProducto(dinero):
 	producto=int(input("\nIngrese el producto que quiere comprar [1/2/3]:\n"))
