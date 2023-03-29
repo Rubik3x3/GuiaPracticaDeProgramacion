@@ -1,2 +1,2 @@
 # GuiaPracticaDeProgramacion
-Guía Práctica de Programación
+Guía Práctica de Programación Escuela Técnica
