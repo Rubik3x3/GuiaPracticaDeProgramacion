@@ -46,5 +46,7 @@ def selEnemigo():
 		armadura = 90
 	else:
 		print("Opción Inválida.")
+		selEnemigo()
 	selGema()
+
 selEnemigo()
