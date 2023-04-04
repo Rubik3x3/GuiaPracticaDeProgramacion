@@ -129,7 +129,15 @@ def verPersonajes():
 	cuenta = 0
 	for i in enumerate(personajes):
 		print("[",cuenta+1,"]",personajes[cuenta].nombre)
-
+		cuenta += 1
+	ans = int(input("\n¿Qué personaje quiere ver?"))
+	p = personajes[ans-1]
+	print("[PERSONAJE ",p.nombre,"]\nNombre: ",p.nombre,"\nPelo: ",p.pelo,"\nOjos: ",p.ojos,"\nRopa: ",p.ropa,"\nAltura: ",p.altura,"\nComplexión: ",p.complexion)
+	ans = str(input("Deseas volver al menu? [y/n]"))
+	if ans == "y":
+		mainMenu()
+	else:
+		verPersonajes()
 def mainMenu():
 	clear()
 	global mensaje
