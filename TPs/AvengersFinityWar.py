@@ -31,22 +31,25 @@ def selGema():
 			print("Mejor no molestar a este fortachón.")
 def selEnemigo():
 	global nombre,fuerza,edad,honestidad,armadura
-	ans = str(input("\n¿Contra quien se enfrentará Thanos? [StarLord/IronMan]: "))
-	if ans == "StarLord":
-		nombre = "StarLord"
+	ans = str(input("\n¿Contra quien se enfrentará Thanos? [Star Lord/Iron Man]: "))
+
+	while ans != "Star Lord" and ans != "Iron Man":
+		print("Opcion incorrecta")
+		ans = str(input("\n¿Contra quien se enfrentará Thanos? [Star Lord/Iron Man]: "))
+
+	if ans == "Star Lord":
+		nombre = "Star Lord"
 		fuerza = 70
 		edad = 38
 		honestidad = True
 		armadura = 20
-	elif ans == "IronMan":
-		nombre = "IronMan"
+	elif ans == "Iron Man":
+		nombre = "Iron Man"
 		fuerza = 160
 		honestidad = 52
 		honestidad = False
 		armadura = 90
-	else:
-		print("Opción Inválida.")
-		selEnemigo()
+	
 	selGema()
 
 selEnemigo()
