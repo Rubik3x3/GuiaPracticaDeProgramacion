@@ -1,3 +1,5 @@
+#Franco Talarico 3°1
+
 """
 Se nos pide realizar un módulo para un proyecto de gestión académica. Dicho módulo será
 usado por el alumno para obtener ciertas estadísticas de su cursada.

@@ -1,3 +1,5 @@
+#Franco Talarico 3°1
+
 fuerza = 0
 edad = 0
 armadura = 0
