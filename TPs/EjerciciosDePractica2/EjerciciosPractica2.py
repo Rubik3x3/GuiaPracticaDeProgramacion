@@ -30,12 +30,13 @@ def viaje(dni,inter,monto):
 	if dni < 28000000:
 		if inter != "si":
 			desc = float(27.2)
-			vuelosInter+=1
 		else:
 			desc = float(22.8)
 	else:
 		desc = float(10)
 
+	if inter == "si":
+		vuelosInter+=1
 	monto = aplicarDescuento(monto,desc)
 	ingresoTotal+=monto
 
