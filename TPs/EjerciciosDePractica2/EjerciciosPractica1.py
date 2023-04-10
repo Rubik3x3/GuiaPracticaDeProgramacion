@@ -19,9 +19,6 @@ esté entre los 2500 y 5000 pesos.
 Al final informar monto total y vuelto al cliente
 """
 
-dni=int(input("Ingrese el número de DNI: "))
-edad=int(input("Ingrese su edad en años: "))
-
 comprar = True
 
 cantTipoProducto = 0
@@ -30,6 +27,9 @@ porcDescuento = 0
 porcDescuento2 = 0
 
 precioFinal = 0
+
+dni=int(input("Ingrese el número de DNI: "))
+edad=int(input("Ingrese su edad en años: "))
 
 def comprarProducto():
 	global comprar,precioFinal,cantTipoProducto
