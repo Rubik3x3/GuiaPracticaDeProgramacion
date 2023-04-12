@@ -2,8 +2,8 @@
 Acción PvP. El módulo que debemos desarrollar es para un juego donde una partida
 tiene varias rondas. Al comenzar la partida el personaje cuenta con 100 de vida
 En cada ronda puede pasar:
- Matar oponente. Lo que hace es recuperar 10 de vida
- Recibe ataque. Acá pierde 40 de vida.
+- Matar oponente. Lo que hace es recuperar 10 de vida
+- Recibe ataque. Acá pierde 40 de vida.
 La partida termina una vez que el personaje muere. Cada vez que termina la
 ronda hay que mostrarle al usuario la vida. Y cuando termino la partida hay que decirle
 cuantos oponentes mató.
@@ -14,8 +14,6 @@ import os
 vidaPersonaje = 100
 oponentesMuertos = 0
 ronda = 1
-
-print(os.name)
 
 def matarOponente(vida,recuperar,oponentes):
 	print("\nEl personaje mato a un oponente y recupero ",recuperar, " de vida.\n")
