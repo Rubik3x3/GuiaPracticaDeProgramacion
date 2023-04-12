@@ -1,0 +1,1 @@
+#Dado un numero decir si dicho número es primo.
