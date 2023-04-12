@@ -14,17 +14,18 @@ lucha se evaluará:
 forma grave, y el jugador perderá.
 
 - Si la vida del oponente no llega a 0 en menos de X turnos, el jugador perderá.
-"""
+""" 
 turnos = 0
 turnoActual = 0
 vidaOponente = 0
 
-turnos = int(input("Ingrese la cantidad de turnos de la partida: "))
-vidaOponente = int(input("Ingrese la vida del oponente: "))
-
 def ataque(danio):
 	global vidaOponente
 	vidaOponente -= danio
+
+turnos = int(input("Ingrese la cantidad de turnos de la partida: "))
+vidaOponente = int(input("Ingrese la vida del oponente: "))
+
 
 for i in range(turnos):
 	turnoActual += 1
@@ -44,6 +45,6 @@ for i in range(turnos):
 		break
 
 	print("Turno: ",i+1,"\nVida del oponente: ",vidaOponente)
-	
+
 if turnoActual >= turnos:
 	print("El jugador perdio. Se acabaron los turnos.")
