@@ -1,10 +1,12 @@
 #Dado un numero decir si dicho número es primo.
 
+import os
+os.system("cls")
 numero=int(input("Ingrese un número para ver si es primo: "))
 divisores=[]
 
 if numero > 0:
-
+	print("Buscando divisores...")
 	for i in range(1,numero+1):
 		if numero % i == 0:
 			divisores.append(int(i))
