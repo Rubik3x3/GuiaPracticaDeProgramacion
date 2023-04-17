@@ -8,7 +8,7 @@ que el oponente cae.
 -- Ataque múltiple perforante. El gamer elige la cantidad de ataques juntos que
 le hace al enemigo. El daño que se le hace no contemplará su armadura
 
--- Ataque básico. Tener en cuenta que al daño que hace el personaje se le
+- Ataque básico. Tener en cuenta que al daño que hace el personaje se le
 descuenta la armadura del oponente.
 
 -- Ataque múltiple especial. El gamer elige la cantidad de ataques juntos que le
@@ -34,6 +34,7 @@ def ataqueMultEsp(danio,armadura):
 		return danio
 	else:
 		print("\nLa armadura es igual a 20 y no se puede efectuar el ataque.")
+		return 0
 
 vidaEnemigo = int(input("Ingrese la vida del enemigo [10-30]: "))
 armaduraEnemigo = int(input("Ingrese la armadura del enemigo [10-30]: "))
