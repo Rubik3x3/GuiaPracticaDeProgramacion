@@ -1,3 +1,4 @@
+#TERMINADO
 #Dado un numero de 5 dígitos decir si es capicúa.
 numero=str(input("Ingrese un número: "))
 
