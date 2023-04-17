@@ -21,3 +21,7 @@ jugador.
 NOTA: Saber que la partida del gamer durará hasta que no quiera jugar más.
 """
 
+oro = 0
+
+
+

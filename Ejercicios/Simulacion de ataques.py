@@ -1,3 +1,4 @@
+
 """
 Simulación de ataques. Dentro de una partida el personaje se enfrenta a un enemigo.
 
@@ -25,7 +26,10 @@ def ataqueMultPerf(danio):
 
 def ataqueBasico(danio,armadura):
 	danio -= armadura
-	return danio
+	if danio < 0:
+		return 0
+	else:
+		return danio
 
 def ataqueMultEsp(danio,armadura):
 	ataques=int(input("Ingrese la cantidad de ataques juntos: "))
@@ -58,14 +62,21 @@ while vidaEnemigo > 0:
 		vidaEnemigo -= danioPersonaje
 	elif ans == 2:
 		danioPersonaje = ataqueBasico(danioPersonaje,armaduraEnemigo)
+		armaduraAntes = armaduraEnemigo
 		armaduraEnemigo -= danioPersonaje
 		if armaduraEnemigo < 0:
-			danioPersonaje += armaduraEnemigo
+			danioPersonaje += armaduraAntes
+			vidaEnemigo -= (danioPersonaje)
+			armaduraEnemigo = 0
 	elif ans == 3:
-		ataqueMultEsp(danioPersonaje,armaduraEnemigo)
+		danioPersonaje = ataqueMultEsp(danioPersonaje,armaduraEnemigo)
+		armaduraAntes = armaduraEnemigo
 		armaduraEnemigo -= danioPersonaje
 		if armaduraEnemigo < 0:
-			danioPersonaje += armaduraEnemigo
+			danioPersonaje += armaduraAntes
+			vidaEnemigo -= (danioPersonaje)
+			armaduraEnemigo = 0
+			
 	print("\nLa armadura del enemigo es: ",armaduraEnemigo,"La vida del enemigo es: ",vidaEnemigo)
 	danioPersonaje = iDanioPersonaje
 	
