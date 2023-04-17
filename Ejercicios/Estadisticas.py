@@ -1,3 +1,5 @@
+#TERMINADO
+
 """Estadísticas: este módulo se usará para el proyecto que automatiza la creación de
 estadísticas según los valores de meteorológicos que se ingresan.
 

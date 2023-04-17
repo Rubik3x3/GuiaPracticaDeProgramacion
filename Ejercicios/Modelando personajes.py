@@ -1,3 +1,5 @@
+#TERMINADO
+
 """
 Modelando personajes. Dentro de este programa podremos crear personajes que
 luego usaremos en el juego. En principio hay que saber que el usuario puede crear la

@@ -1,3 +1,5 @@
+#TERMINADO
+
 """Mesa de entrada: en este módulo se necesita hacer un control de los empleados que
 ingresan y salen de la organización. El módulo estará en una aplicación que la
 manejará el recepcionista de la mesa de entrada.

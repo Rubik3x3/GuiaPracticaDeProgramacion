@@ -1,3 +1,5 @@
+#TERMINADO
+
 """
 Controles de presión. Dentro del laboratorio se manejan tanques de gases que se
 encuentran a determinada presión para a este controlado. En este módulo se deberá

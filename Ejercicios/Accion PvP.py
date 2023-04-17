@@ -1,3 +1,5 @@
+#TERMINADO
+
 """
 Acción PvP. El módulo que debemos desarrollar es para un juego donde una partida
 tiene varias rondas. Al comenzar la partida el personaje cuenta con 100 de vida

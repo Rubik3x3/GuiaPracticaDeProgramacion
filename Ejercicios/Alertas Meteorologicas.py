@@ -1,3 +1,5 @@
+#TERMINADO
+
 """Alertas meteorológicas: acá se deberá controlar ciertos valores y cantidades para dar
 alertas meteorológicas.
 
