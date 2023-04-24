@@ -37,5 +37,4 @@ def clear():
         os.system("clear")
 
 def mainScreen():
-
-
+    pass
