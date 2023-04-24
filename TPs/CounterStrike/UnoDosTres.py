@@ -54,7 +54,9 @@ d. Construir trinchera: el jugador puede construir una trinchera para su
 protección. La trinchera necesita 30 costales, pero se sabe que el jugador no
 puede cargarlos todo de una vez. El jugador agarra X cantidad de costales y los
 lleva al lugar donde quiere colocarlos, así sucesivamente hasta haber construido
-la trinchera. El programa debe decirme cuando la trinchera está construida y si
+la trinchera. 
+
+El programa debe decirme cuando la trinchera está construida y si
 sobro algún costal de los que llevo ya que pudo haber llevado más de 30 costales
 en la suma de cada viaje. Por ultimo también me tiene que decir cuántos viajes
 en total hizo nuestro jugador entre la trinchera y el lugar donde estaban los
