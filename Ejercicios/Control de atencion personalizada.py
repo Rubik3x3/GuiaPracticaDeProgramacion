@@ -30,3 +30,4 @@ informar al cuerpo de seguridad que “controle la situación”. Allí también
 acaba el funcionamiento del programa.
 """
 
+paciencia = 100

@@ -25,13 +25,29 @@ oro = 0
 artefacto = ""
 valorArtefacto = 0
 
-print("Opciones:\n\n[1] Aventurarse\n[2] Comprar un artefacto\n[3] Trueque\nOpcion: ",end="")
-ans = int(input())
+seguirJugando = True
 
-if ans == 1:
-	cantOro = int(input("Oro encontrado: "))
-	oro += cantOro
-elif ans == 2:
+artefacto = str(input("Ingrese el artefacto: "))
+valorArtefacto = int(input("Ingrese el valor del artefacto: "))
+
+while seguirJugando == True:
+	print("Opciones:\n\n[1] Aventurarse\n[2] Comprar un artefacto\n[3] Trueque\nOpcion: ",end="")
+	ans = int(input())
+
+	if ans == 1:
+		cantOro = int(input("Oro encontrado: "))
+		oro += cantOro
+		print("Tienes ",oro, " de oro.")
+	elif ans == 2:
+		pass
+	elif ans == 3:
+		pass
+
+	ansSeguir = str(input("Quiere seguir jugando? [si/no]"))
+
+	if ansSeguir == "no":
+		seguirJugando = False
+
 
 
 
