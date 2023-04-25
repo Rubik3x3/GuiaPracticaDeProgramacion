@@ -21,6 +21,18 @@ jugador.
 NOTA: Saber que la partida del gamer durará hasta que no quiera jugar más.
 """
 
+oro = 0
+artefacto = ""
+valorArtefacto = 0
+
+print("Opciones:\n\n[1] Aventurarse\n[2] Comprar un artefacto\n[3] Trueque\nOpcion: ",end="")
+ans = int(input())
+
+if ans == 1:
+	cantOro = int(input("Oro encontrado: "))
+	oro += cantOro
+elif ans == 2:
+
 
 
 
