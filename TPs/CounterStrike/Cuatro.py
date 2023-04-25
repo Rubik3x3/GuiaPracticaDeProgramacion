@@ -1,13 +1,21 @@
-scores = []  # Scores
-scoreMax = [0, 1,""]  # [Score,Posicion,Equipo]
-scoreMin = [0, 1,""]  # [Score,Posicion,Equipo]
-totalScores = 0  # Suma de todos los scores
+"""
+Al terminar la partida el Gamer ingresará los scores de TODOS los jugadores, (se sabe
+que la cantidad de jugadores por equipo es de 5) y el programa me deberá decir:
+a. El score total que se generó en la partida.
+b. El score más alto y el score más bajo, el rango entre ellos, junto con sus
+respectivas posiciones según el orden ingresado por el Gamer.
+c. El score promedio.
+"""
 
-def verEquipo(numero):
-    if numero < 5:
-        return "Policia"
-    else:
-        return "Terrorista"
+scoreMax = 0
+scoreMaxPos = 1
+scoreMaxEq = ""
+
+scoreMin = 0
+scoreMinPos = 1
+scoreMaxEq = ""
+
+totalScores = 0  
 
 for i in range(10):
     if i < 5:
@@ -16,32 +24,39 @@ for i in range(10):
         print("Ingrese el score ", i-4, " de los terroristas: ", end="", sep="")
 
     score = int(input())
-    scores.append(score)
 
     if i == 0:
-        scoreMax[0] = score
-        scoreMin[0] = score
-        scoreMax[2] = "Policia"
-        scoreMin[2] = "Policia"
+        scoreMax = score
+        scoreMin = score
+
+        scoreMaxEq = "Policia"
+        scoreMinEq = "Policia"
     else:
-        if scoreMax[0] < score:
-            scoreMax[0] = score
-            scoreMax[1] = i+1  # Posicion
-            scoreMax[2] = verEquipo(i)
-        if scoreMin[0] > score:
-            scoreMin[0] = score
-            scoreMin[1] = i+1  # Posicion
-            scoreMin[2] = verEquipo(i)
+        if scoreMax < score:
+            scoreMax = score
+            scoreMaxPos = i+1 
+
+            if i < 5:
+                scoreMaxEq = "Policia"
+            else:
+                scoreMaxEq = "Terrorista"
+
+        if scoreMin > score:
+            scoreMin = score
+            scoreMinPos = i+1 
+
+            if i < 5:
+                scoreMinEq = "Policia"
+            else:
+                scoreMinEq = "Terrorista"
 
     totalScores += score
 
-# Calcular promedio
 promedioScores = totalScores/10
-diferenciaScores = scoreMax[0]-scoreMin[0]
-
-# Mostrar los datos
-print("Todos los scores: ", scores, sep="")
-print("Score más alto: ", scoreMax[0], " jugador: ", scoreMax[1], " equipo: ", scoreMax[2], sep="")
-print("Score más bajo: ", scoreMin[0], " jugador: ", scoreMin[1], " equipo: ", scoreMin[2], sep="")
+diferenciaScores = scoreMax-scoreMin
+ 
+#print("Todos los scores: ", scores, sep="")
+print("Score más alto: ", scoreMax, " jugador: ", scoreMaxPos, " equipo: ", scoreMaxEq, sep="")
+print("Score más bajo: ", scoreMin, " jugador: ", scoreMinPos, " equipo: ", scoreMinEq, sep="")
 print("Rango: ", diferenciaScores, sep="")
 print("Promedio Scores: ", promedioScores, sep="")

@@ -29,12 +29,4 @@ en otro modulo solo se encarga de la entrada y salida de empleados.
 informar al cuerpo de seguridad que “controle la situación”. Allí también se
 acaba el funcionamiento del programa.
 """
-#Limpiar pantalla
-def clear():
-    if os.name == "nt":
-        os.system("cls")
-    else:
-        os.system("clear")
 
-def mainScreen():
-    pass
