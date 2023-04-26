@@ -31,3 +31,34 @@ acaba el funcionamiento del programa.
 """
 
 paciencia = 100
+problemaSolucionado = False
+problema = ""
+def solucionarProblema(oficina):
+	global paciencia
+	print("Te encuentras en la oficina ",oficina)
+	ans = str(input("Solucionaron tu problema? [si/no]"))
+	if ans == "si":
+		print("Problema solucionado.")
+		exit()
+	else:
+		paciencia -= 30
+		if paciencia <= 0:
+			print("El emplezado tiene un día de furia")
+			print("El cuerpo de seguridad debe controlar la situacion.")
+			exit()
+print("Te encuentras en la mesa de entrada.")
+
+problema = str(input("Ingrese el problema que tiene: "))
+
+while problemaSolucionado == False:
+	print("A qué oficina lo dirigen? \n"+oficinas)
+	off = int(input())
+
+	if off == 1:
+		solucionarProblema("309")
+	elif off == 2:
+		solucionarProblema("318")
+	elif off == 3:
+		solucionarProblema("de empleados")
+	else:
+		print("No existe esa oficina")
