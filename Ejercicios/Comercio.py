@@ -47,6 +47,7 @@ while seguirJugando == True:
 			print("Compraste el artefacto ",artefactoCompra)
 			artefacto = artefactoCompra
 			valorArtefacto = valorCompra
+			oro -= valorCompra
 		else:
 			print("No tienes suficiente dinero para comprar el artefacto.")
 
