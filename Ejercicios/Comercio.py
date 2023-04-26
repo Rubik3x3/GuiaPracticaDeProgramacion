@@ -39,16 +39,34 @@ while seguirJugando == True:
 		oro += cantOro
 		print("Tienes ",oro, " de oro.")
 	elif ans == 2:
-		pass
+		artefactoCompra = str(input("Ingrese el artefacto que quiere comprar: "))
+		partes = int(input("Ingrese las partes en las que se compra el artefacto: "))
+		valorCompra = partes*40
+
+		if oro >= valorCompra:
+			print("Compraste el artefacto ",artefactoCompra)
+			artefacto = artefactoCompra
+			valorArtefacto = valorCompra
+		else:
+			print("No tienes suficiente dinero para comprar el artefacto.")
+
 	elif ans == 3:
-		pass
+		artefactoOtroJ = str(input("Ingrese el artefacto del otro jugador: "))
+		valorOtroJ = int(input("Ingrese el precio del artefacto del otro jugador: "))
+
+		if valorArtefacto <= valorOtroJ:
+			print("Cambiaste el artefacto ",artefacto," por ",artefactoOtroJ)
+			artefacto = artefactoOtroJ
+			valorArtefacto = valorOtroJ
+		else:
+			print("El valor de tu artefacto es mayor al del otro jugador.")
+
 
 	ansSeguir = str(input("Quiere seguir jugando? [si/no]"))
 
 	if ansSeguir == "no":
 		seguirJugando = False
 
-
-
-
-
+print("Artefacto: ",artefacto)
+print("Oro: ",oro)
+print("Valor artefacto: ",valorArtefacto)
