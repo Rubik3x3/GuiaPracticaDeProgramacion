@@ -87,4 +87,3 @@ a. La productoria de dichos scores, la sumatoria por cada lote.
 b. Cuantos valores positivos por cada lote y cuantos lotes hay en total
 """
 
-

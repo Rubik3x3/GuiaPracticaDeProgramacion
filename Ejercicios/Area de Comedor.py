@@ -18,17 +18,43 @@ carne = 0
 verdura = 0
 seguir = "si"
 
+
+def comprar(cantidad):
+    ans = int(input("\nIngrese la cantidad que quiere comprar: "))
+
+    return cantidad+ans, ans
+
+
+def comprar(cantidad):
+    ans = int(input("\nIngrese la cantidad que quiere comprar: "))
+
+    return cantidad+ans, ans
+
+
+def comprar(cantidad):
+    ans = int(input("\nIngrese la cantidad que quiere comprar: "))
+
+    return cantidad+ans, ans
+
+
 while seguir == "si":
+    print(f'Tienes:\nCarne: {carne} - Verdura: {verdura}')
+    opc = int(input(
+        "\nAcciones a realizar:\n[1] Comprar\n[2] Consumir\n[3] Se pudrio un alimento\n:"))
+    if opc == 1:
+        comida = int(input("\nQué quiere comprar?\n[1] Carne\n[2] Verdura\n:"))
+        if comida == 1:
+            carne, cantidad = comprar(carne)
+            print(f'\nCompraste {cantidad} de carne.\n')
+        elif comida == 2:
+            verdura, cantidad = comprar(verdura)
+            print(f'\nCompraste {cantidad} de verdura.\n')
+    elif opc == 2:
+        pass
+    elif opc == 3:
+        pass
+    else:
+        pass
 
-	ans = int(input("Acciones a realizar:\n[1] Comprar\n[2] Consumir\n[3] Se pudrio un alimento"))
-
-	if ans == 1:
-		pass
-	elif ans == 2:
-		pass
-	elif ans == 3:
-		pass
-	else:
-		pass
-
-	
+    if carne <= 0 or verdura <= 0:
+        print("ALERTA, te has quedado sin algun tipo de comida.")
