@@ -1,6 +1,6 @@
-#EVALUACIÓN DE COMPUTACIÓN - Franco Talarico - 29/03/2023
+# EVALUACIÓN DE COMPUTACIÓN - Franco Talarico - 29/03/2023 - Nota: 3/3
 
-#Problema:
+# Problema:
 """
 Este sistema gestionará las compras de un almacen.
 El usuario cargara el producto, la cantidad y el precio base del mismo.
@@ -15,13 +15,13 @@ total = 0
 for i in range(2):
     precioFinal = 0
 
-    print("Ingrese el producto ",i+1)
+    print("Ingrese el producto ", i+1)
     producto = str(input())
 
-    print("Ingrese el precio base del producto ",i+1)
+    print("Ingrese el precio base del producto ", i+1)
     precioBase = int(input())
 
-    print("Ingrese la cantidad de productos",i+1)
+    print("Ingrese la cantidad de productos", i+1)
     cantidad = int(input())
 
     precioIVA = precioBase+((precioBase*14)/100)
@@ -33,7 +33,7 @@ for i in range(2):
 
     total += (precioFinal * cantidad)
 
-print("El precio total es de: $",total)
+print("El precio total es de: $", total)
 monto = int(input("Ingrese el monto con el que va a pagar: $"))
 vuelto = monto-total
-print("Tu vuelto es de $",vuelto)
+print("Tu vuelto es de $", vuelto)
