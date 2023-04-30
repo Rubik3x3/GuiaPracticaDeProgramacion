@@ -25,14 +25,14 @@ def comprar(cantidad):
     return cantidad+ans, ans
 
 
-def comprar(cantidad):
-    ans = int(input("\nIngrese la cantidad que quiere comprar: "))
+def consumir(cantidad):
+    ans = int(input("\nIngrese la cantidad que quiere consumir: "))
 
     return cantidad+ans, ans
 
 
-def comprar(cantidad):
-    ans = int(input("\nIngrese la cantidad que quiere comprar: "))
+def pudrio(cantidad):
+    ans = int(input("\nIngrese la cantidad de productos que se pudrieron: "))
 
     return cantidad+ans, ans
 
