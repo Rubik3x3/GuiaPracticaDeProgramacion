@@ -65,37 +65,34 @@ Al finalizar, se deberá informar cuantas fueron las temperaturas registradas su
 """
 
 seguir = str("si")
+velMin = int(15000)
+velMax = int(16000)
 CO = float(1.67)
-
-velocidad = int(0)
-temperatura = int(0)
+velocidad = float(0.0)
+temperatura = float(0.0)
+tempMin = int(30)
 temperaturas = int(0)
 
 while seguir == "si":
 	opc = int(input("Opciones: [1] Control de satélite [2] Lecturas de temperatura"))
 	if opc == 1:
-		velocidad = int(input("Ingrese la velocidad del satélite: "))
-		if velocidad >= 15000 and velocidad <= 16000:
+		velocidad = float(input("Ingrese la velocidad del satélite: "))
+		if velocidad <= velMax and velocidad >= velMin:
 			print("El satélite está en la órbita.")
 		else:
 			print("El satélite no está en la órbita. Se realiza una correción orbital")
-			if velocidad < 15000:
-				while velocidad < 15000:
-					porcentaje = (velocidad*CO)/100
-					velocidad += porcentaje
-					print(f'Suma: {porcentaje} Velocidad: {velocidad}')
-				print("El satélite está en órbita")
-			else:
-				while velocidad > 16000:
-					porcentaje = (velocidad*CO)/100
-					velocidad -= porcentaje
-					print(f'Suma: {porcentaje} Velocidad: {velocidad}')
-				print("El satélite está en órbita.")
-
+			while velocidad < velMin or velocidad > velMax:
+				porcVel = (velocidad*CO)/100
+				if velocidad < velMin:
+					velocidad += porcVel
+				else:
+					velocidad -= porcVel
+			print(f'Velocidad: {velocidad}')
+			print("El satélite está en órbita")
 	elif opc == 2:
-		temperatura = int(input("Ingrese la temperatura del satélite: "))
+		temperatura = float(input("Ingrese la temperatura del satélite: "))
 		region = str(input("Ingrese la región del satélite: "))
-		if temperatura > 30:
+		if temperatura > tempMin:
 			temperaturas += 1
-
-print(f'Temperaturas: {temperaturas} Región: {region}')
+	seguir = str(input("Quiere seguir? [si/no]"))
+print(f'Temperaturas mayores a 30: {temperaturas}')
