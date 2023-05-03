@@ -20,17 +20,15 @@ seguir = "si"
 
 def comprar(cantidad):
     ans = int(input("\nIngrese la cantidad que quiere comprar: "))
-
     return cantidad+ans, ans
+
 def consumir(cantidad):
     ans = int(input("\nIngrese la cantidad que quiere consumir: "))
-
     return cantidad-ans, ans
 
 def pudrio(cantidad):
     ans = int(input("\nIngrese la cantidad de productos que se pudrieron: "))
-
-    return cantidad-ans
+    return cantidad-ans, ans
 
 while seguir == "si":
     print(f'Tienes:\nCarne: {carne} - Verdura: {verdura}')
@@ -44,22 +42,28 @@ while seguir == "si":
         elif comida == 2:
             verdura, cantidad = comprar(verdura)
             print(f'\nCompraste {cantidad} de verdura.\n')
+        else:
+            print("Ingrese una opción válida.")
     elif opc == 2:
         comida = int(input("\nQué quiere consumir?\n[1] Carne\n[2] Verdura\n:"))
         if comida == 1:
-            carne, cantidad = comprar(carne)
+            carne, cantidad = consumir(carne)
             print(f'\nCompraste {cantidad} de carne.\n')
         elif comida == 2:
-            verdura, cantidad = comprar(verdura)
+            verdura, cantidad = consumir(verdura)
             print(f'\nCompraste {cantidad} de verdura.\n')
+        else:
+            print("Ingrese una opción válida.")
     elif opc == 3:
         comida = int(input("\nQué comida se pudrio?\n[1] Carne\n[2] Verdura\n:"))
         if comida == 1:
-            carne, cantidad = comprar(carne)
-            print(f'\nCompraste {cantidad} de carne.\n')
+            carne, cantidad = pudrio(carne)
+            print(f'\nSe pudrio {cantidad} de carne.\n')
         elif comida == 2:
-            verdura, cantidad = comprar(verdura)
-            print(f'\nCompraste {cantidad} de verdura.\n')
+            verdura, cantidad = pudrio(verdura)
+            print(f'\nSe pudrio {cantidad} de verdura.\n')
+        else:
+            print("Ingrese una opción válida.")
     else:
         print("Ingrese una acción válida.")
 
