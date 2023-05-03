@@ -52,6 +52,7 @@ a. Control de satélite: Se ingresa la velocidad del mismo. Si está fuera del r
 se realiza una corrección orbital.
 
 b. Lecturas de temperatura: se ingresa la temperatura y región medida.
+
 Un satélite de este tipo, para permanecer en órbita necesita estar a una velocidad, como
 rango normal, entre 15mil Km/h y 16mil Km/h.
 
@@ -63,15 +64,38 @@ Al finalizar, se deberá informar cuantas fueron las temperaturas registradas su
 30.
 """
 
-
 seguir = str("si")
 CO = float(1.67)
 
 velocidad = int(0)
 temperatura = int(0)
+temperaturas = int(0)
 
 while seguir == "si":
 	opc = int(input("Opciones: [1] Control de satélite [2] Lecturas de temperatura"))
 	if opc == 1:
 		velocidad = int(input("Ingrese la velocidad del satélite: "))
+		if velocidad >= 15000 and velocidad <= 16000:
+			print("El satélite está en la órbita.")
+		else:
+			print("El satélite no está en la órbita. Se realiza una correción orbital")
+			if velocidad < 15000:
+				while velocidad < 15000:
+					porcentaje = (velocidad*CO)/100
+					velocidad += porcentaje
+					print(f'Suma: {porcentaje} Velocidad: {velocidad}')
+				print("El satélite está en órbita")
+			else:
+				while velocidad > 16000:
+					porcentaje = (velocidad*CO)/100
+					velocidad -= porcentaje
+					print(f'Suma: {porcentaje} Velocidad: {velocidad}')
+				print("El satélite está en órbita.")
 
+	elif opc == 2:
+		temperatura = int(input("Ingrese la temperatura del satélite: "))
+		region = str(input("Ingrese la región del satélite: "))
+		if temperatura > 30:
+			temperaturas += 1
+
+print(f'Temperaturas: {temperaturas} Región: {region}')
