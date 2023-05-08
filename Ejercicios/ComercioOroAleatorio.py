@@ -23,6 +23,8 @@ NOTA: Saber que la partida del gamer durará hasta que no quiera jugar más.
 import random
 
 oro = 0
+oroMin = 1
+oroMax = 100
 artefacto = ""
 valorArtefacto = 0
 
@@ -36,7 +38,7 @@ while seguirJugando == True:
 	ans = int(input())
 
 	if ans == 1:
-		cantOro = random.randint(1,100)
+		cantOro = random.randint(oroMin,oroMax)
 		oro += cantOro
 		print("Oro encontrado: ",cantOro)
 		print("Tienes ",oro, " de oro.")
