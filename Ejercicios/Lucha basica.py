@@ -14,7 +14,14 @@ lucha se evaluará:
 forma grave, y el jugador perderá.
 
 - Si la vida del oponente no llega a 0 en menos de X turnos, el jugador perderá.
+
+54616c617269636f
+
+01010100 01100001 01101100 01100001 01110010 01101001 01100011 01101111 
 """ 
+
+#Franco Talarico 3°1
+
 turnos = 0
 turnoActual = 0
 vidaOponente = 0
