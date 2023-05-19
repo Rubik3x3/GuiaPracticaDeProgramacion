@@ -14,4 +14,4 @@
 - Iteraciones 2
 - Pensando para resolver
 
-Guía terminada el 3/5/2023
+Guía terminada el 3/5/2023.
