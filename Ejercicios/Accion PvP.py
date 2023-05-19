@@ -9,6 +9,8 @@ En cada ronda puede pasar:
 La partida termina una vez que el personaje muere. Cada vez que termina la
 ronda hay que mostrarle al usuario la vida. Y cuando termino la partida hay que decirle
 cuantos oponentes mató.
+
+Franco Talarico 3°1
 """
 
 import os
