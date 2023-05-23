@@ -21,10 +21,10 @@ userControlDeRecursos = ["user6", "pass6", 6, "Control de Recursos"]
 
 usuariosTOTALES = [userSecAdministrativoOficinas, userSecAdministrativoRecepcion,
                    userDesarrolladores, userGerentes, userRRHH, userControlDeRecursos]
-# Limpia la pantalla
 
 login = []
 
+# Limpia la pantalla
 def clear():
     if os.name == "nt":
         os.system("cls")
@@ -64,18 +64,28 @@ def login():
             print(
                 f'Logueado correctamente.\n\nUsuario: {usuarioFinal[0]}\nÁrea: {usuarioFinal[3]}')
 
-            return usuarioFinal[0], usuarioFinal[1], usuarioFinal[2], usuarioFinal[3]
+            login = usuarioFinal[0], usuarioFinal[1], usuarioFinal[2], usuarioFinal[3]
+            areas(login[2])
+
         else:
             clear()
             print("No se pudo loguear.")
             time.sleep(1)
 
+#Termina el programa y lo vuelve a iniciar
+def cerrarSesion():
+    global login
+    login = []
+    if os.name == "nt":
+        os.system("python TP_grupo7.py")
+    else:
+        os.system("python3 TP_grupo7.py")
 
 def sector_administrativo_oficinas():
-    global login
+    global login, dineroDisponibleInicial, sueldoBasico
 
     continuar = 1
-    while continuar == 1:
+    while continuar == 1 and login != []:
         clear()
         print(
             "\nOpciones:\n\n[1] Sueldos\n[2] Gastos varios\n[3] Proyectos vendidos\n[4] Cerrar sesión")
@@ -128,33 +138,87 @@ def sector_administrativo_oficinas():
                 montoArticulo = int(input("Ingrese el monto del artículo: "))
 
                 totalGasto += montoArticulo
-                dineroDisponibleInicial -= montoArticulo
+                
                 print(f'Dinero antes de la compra: $ {dineroDisponibleInicial}\nDinero a gastar: ${montoArticulo}\nDinero final: ${dineroDisponibleInicial-montoArticulo}\n\nGasto total: {totalGasto}')
-
+                dineroDisponibleInicial -= montoArticulo
                 continuarGastos = int(
                         input("\n¿Quiere continuar ingresando artículos? [1] Sí - [2] No : "))
+                
 
         elif opc == 3:
-            print("Proyectos vendidos.")
-            nombreProyecto = str(input("Ingrese el nombre del proyecto: "))
-            montoProyecto = str(input("Ingrese el monto del proyecto: "))
+            continuarProyectos = 1
+            while continuarProyectos == 1:
+                print("Proyectos vendidos.")
+                nombreProyecto = str(input("Ingrese el nombre del proyecto: "))
+                montoProyecto = str(input("Ingrese el monto del proyecto: "))
+
+                print(f'Dinero inicial: ${dineroDisponibleInicial}\nDinero final: ${dineroDisponibleInicial+montoProyecto}')
+
+                dineroDisponibleInicial+=montoProyecto
+
+                continuarProyectos = int(
+                        input("\n¿Quiere continuar ingresando proyectos? [1] Sí - [2] No : "))
 
         elif opc == 4:
-            if os.name == "nt":
-                os.system("python TP_grupo7.py")
-            else:
-                os.system("python3 TP_grupo7.py")
-
+            cerrarSesion()
 
 def sector_administrativo_recepcion():
-    print("Recepcion")
+    continuar = 1
 
 
-def gerentes():
-    pass
+    while continuar == 1 and login != []: 
+        clear()
+        print("\nOpciones:\n\n[1] Calcular empleados\n[2] Cerrar sesión")
+
+        opc = int(input("\nOpción seleccionada: "))
+
+        if opc == 1:
+            continuarCalcEmpleados = 1
+            while continuarCalcEmpleados == 1:
+                totalEmpleados = 0
+                empleadosEnLaOrganizacion = 0
+
+                empleadosPorHora=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                salen=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                entran=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                horas=["6:00hs","7:00hs","8:00hs","9:00hs","10:00hs","11:00hs","12:00hs","13:00hs","14:00hs","15:00hs","16:00hs","17:00hs","18:00hs","19:00hs","20:00hs"]
+
+                for i in range(15):
+                    os.system("cls")
+                    print("\nIngrese la cantidad de empleados que entran en la hora: ",horas[i],"\n")
+                    iEntran=int(input())
+                    print("\nIngrese la cantidad de empleados que salen en la hora: ",horas[i],"\n")
+                    iSalen= int(input())
+
+                    salen[i] = iSalen
+                    entran[i] = iEntran
+
+                    empleadosEnLaOrganizacion += (entran[i]-salen[i])
+                    empleadosPorHora[i] = empleadosEnLaOrganizacion
+
+                    totalEmpleados += entran[i]
+
+                    print("\nEmpleados en la organizacion: ",empleadosEnLaOrganizacion)
+                    print("En la hora ",horas[i],":\nEntran: ",entran[i],"\nSalen: ",salen[i])
+
+                os.system("cls")
+
+                for i in range(15):
+                    print("\nA las ",horas[i]," entran ",entran[i]," empleados y salen ",salen[i])
+                    print("Empleados en la organizacion: ",empleadosPorHora[i])
+                    print("Empleados totales de la organizacion: ",totalEmpleados)
+
+                continuarCalcEmpleados = int(
+                                input("\n¿Quiere continuar calculando empleados? [1] Sí - [2] No : "))   
+        elif opc == 2:
+            cerrarSesion()  
 
 
 def desarrolladores():
+    pass
+
+
+def gerentes():
     pass
 
 
@@ -165,21 +229,21 @@ def recursos_humanos():
 def control_de_recursos():
     pass
 
-
-def areas():
+#Selector de area por número de area
+def areas(area):
     if area == 1:
         sector_administrativo_oficinas()
     elif area == 2:
         sector_administrativo_recepcion()
     elif area == 3:
-        gerentes()
-    elif area == 4:
         desarrolladores()
+    elif area == 4:
+        gerentes()
     elif area == 5:
         recursos_humanos()
     elif area == 6:
         control_de_recursos()
+    else:
+        print("Area incorrecta.")
 
-
-login = login()
-
+login()
