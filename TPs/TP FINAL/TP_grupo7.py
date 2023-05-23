@@ -81,6 +81,16 @@ def cerrarSesion():
     else:
         os.system("python3 TP_grupo7.py")
 
+def calcular_puntos(semanas,paga,modulos,tareas):
+    puntos = float(0)
+    puntos = (0.7*semanas)+(0.00005*paga)+modulos+(5*tareas)
+
+    if puntos > 100:
+        puntos = float(100)
+
+    puntos = round(puntos)
+    return puntos
+
 def sector_administrativo_oficinas():
     global login, dineroDisponibleInicial, sueldoBasico
 
@@ -165,7 +175,6 @@ def sector_administrativo_oficinas():
 def sector_administrativo_recepcion():
     continuar = 1
 
-
     while continuar == 1 and login != []: 
         clear()
         print("\nOpciones:\n\n[1] Calcular empleados\n[2] Cerrar sesión")
@@ -215,8 +224,46 @@ def sector_administrativo_recepcion():
 
 
 def desarrolladores():
-    pass
+    continuar = 1
 
+    while continuar == 1 and login != []: 
+        clear()
+        print("\nOpciones:\n\n[1] Calcular prioridades\n[2] Cerrar sesión")
+
+        opc = int(input("\nOpción seleccionada: "))
+
+        if opc == 1:
+            continuarCalcPrioridades = 1
+            while continuarCalcPrioridades == 1:
+                clear()
+
+                #PUNTAJE Y NÚMERO DE PROYECTO
+                puntoMaximo = [int(0),int(0)]
+                puntoMedio = [int(0),int(0)]
+                puntoMinimo = [int(0),int(0)]
+                listaPuntajes = []
+
+                for proyecto in range(0,3):
+                    clear()
+                    semanas = int(input(f'Ingrese la cantidad de semanas para su elaboración (proyecto {proyecto+1}): '))
+                    paga = float(input(f'Ingrese cuanto se le va a pagar (proyecto {proyecto+1}): '))
+                    modulos = int(input(f'Ingrese la cantidad de módulos (proyecto {proyecto+1}): '))
+                    tareas = int(input(f'Ingrese la cantidad de tareas a realizar (proyecto {proyecto+1}): '))
+
+                    puntos = calcular_puntos(semanas,paga,modulos,tareas)
+                    
+                    listaPuntajes.append(puntos)
+
+                    
+
+                clear()
+                print(listaPuntajes)
+                print(f'Prioridades:\n\n1# {puntoMaximo[0]} (proyecto {puntoMaximo[1]})\n2# {puntoMedio[0]} (proyecto {puntoMedio[1]})\n3# {puntoMinimo[0]} (proyecto {puntoMinimo[1]})')
+                continuarCalcPrioridades = int(
+                                input("\n¿Quiere continuar calculando prioridades? [1] Sí - [2] No : ")) 
+
+        elif opc == 2:
+            cerrarSesion()
 
 def gerentes():
     pass
