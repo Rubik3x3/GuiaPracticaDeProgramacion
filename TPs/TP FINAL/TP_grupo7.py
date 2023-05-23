@@ -1,6 +1,5 @@
 import os
 import time
-
 # Información Base
 dineroDisponibleInicial = int(875000)
 sueldoBasico = int(8875)
@@ -22,9 +21,9 @@ userControlDeRecursos = ["user6", "pass6", 6, "Control de Recursos"]
 
 usuariosTOTALES = [userSecAdministrativoOficinas, userSecAdministrativoRecepcion,
                    userDesarrolladores, userGerentes, userRRHH, userControlDeRecursos]
-
 # Limpia la pantalla
 
+login = []
 
 def clear():
     if os.name == "nt":
@@ -33,45 +32,48 @@ def clear():
         os.system("clear")
 
 # Login de usuario y contraseña
-
-
 def login():
+    global login
+    login = []
 
-    clear()
     logueado = False
-    usuarioFinal = []
-    acumuladorUsuarios = 0
+    while logueado == False:
+        clear()
+        logueado = False
+        usuarioFinal = []
+        acumuladorUsuarios = 0
 
-    userLogueado = str(input("Ingresar el Usuario: "))
+        userLogueado = str(input("Ingresar el Usuario: "))
 
-    for usuario in usuariosTOTALES:
-        if usuario[0] == userLogueado:
+        for usuario in usuariosTOTALES:
+            if usuario[0] == userLogueado:
+                clear()
+
+                print("Usuario: ", userLogueado, sep="")
+
+                passLogueada = str(input("Ingresar la Contraseña: "))
+
+                if usuario[1] == passLogueada:
+                    logueado = True
+                    usuarioFinal = usuario
+
+            acumuladorUsuarios += 1
+
+        if logueado:
             clear()
+            print(
+                f'Logueado correctamente.\n\nUsuario: {usuarioFinal[0]}\nÁrea: {usuarioFinal[3]}')
 
-            print("Usuario: ", userLogueado, sep="")
-
-            passLogueada = str(input("Ingresar la Contraseña: "))
-
-            if usuario[1] == passLogueada:
-                logueado = True
-                usuarioFinal = usuario
-
-        acumuladorUsuarios += 1
-
-    if logueado:
-        clear()
-        print(
-            f'Logueado correctamente.\n\nUsuario: {usuarioFinal[0]}\nÁrea: {usuarioFinal[3]}')
-
-        return usuarioFinal[0], usuarioFinal[1], usuarioFinal[2], usuarioFinal[3]
-    else:
-        clear()
-        print("No se pudo loguear.")
-        time.sleep(1)
-        login()
+            return usuarioFinal[0], usuarioFinal[1], usuarioFinal[2], usuarioFinal[3]
+        else:
+            clear()
+            print("No se pudo loguear.")
+            time.sleep(1)
 
 
-def sector_administrativo_oficinas(login):
+def sector_administrativo_oficinas():
+    global login
+
     continuar = 1
     while continuar == 1:
         clear()
@@ -117,9 +119,20 @@ def sector_administrativo_oficinas(login):
                     input("\n¿Quiere continuar cargando empleados? [1] Sí - [2] No : "))
 
         elif opc == 2:
-            print("Gastos vendidos.")
-            tipoArticulo = str(input("Ingrese el tipo de artículo: "))
-            montoArticulo = str(input("Ingrese el monto del artículo: "))
+            continuarGastos = 1
+            totalGasto = 0
+            while continuarGastos == 1:
+                clear()
+                print("Gastos vendidos.")
+                tipoArticulo = str(input("Ingrese el tipo de artículo: "))
+                montoArticulo = int(input("Ingrese el monto del artículo: "))
+
+                totalGasto += montoArticulo
+                dineroDisponibleInicial -= montoArticulo
+                print(f'Dinero antes de la compra: $ {dineroDisponibleInicial}\nDinero a gastar: ${montoArticulo}\nDinero final: ${dineroDisponibleInicial-montoArticulo}\n\nGasto total: {totalGasto}')
+
+                continuarGastos = int(
+                        input("\n¿Quiere continuar ingresando artículos? [1] Sí - [2] No : "))
 
         elif opc == 3:
             print("Proyectos vendidos.")
@@ -153,9 +166,9 @@ def control_de_recursos():
     pass
 
 
-def areas(area, login):
+def areas():
     if area == 1:
-        sector_administrativo_oficinas(login)
+        sector_administrativo_oficinas()
     elif area == 2:
         sector_administrativo_recepcion()
     elif area == 3:
@@ -170,4 +183,3 @@ def areas(area, login):
 
 login = login()
 
-areas(login[2], login)
