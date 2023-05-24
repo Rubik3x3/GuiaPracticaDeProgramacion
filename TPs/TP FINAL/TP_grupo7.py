@@ -22,8 +22,16 @@ userControlDeRecursos = ["user6", "pass6", 6, "Control de Recursos"]
 usuariosTOTALES = [userSecAdministrativoOficinas, userSecAdministrativoRecepcion,
                    userDesarrolladores, userGerentes, userRRHH, userControlDeRecursos]
 
+ingresosTotales = int(0)
+gastosTotales = int(0)
+sueldoMasBajo = int(0)
+sueldoMasAlto = int(0)
 
-datosGerentes = []
+horarioMayorCantEmpleadosOrganizacion = ""
+
+proyectoMasPrioridad = int(0)
+
+
 
 login = []
 
@@ -101,6 +109,22 @@ def calcular_puntos(semanas, paga, modulos, tareas):
     puntos = round(puntos)
     return puntos
 
+def cargo_a_ocupar(pProgramacion,pTrabajoEquipo,pOrden,pCreatividad,telefono,ocupacion):
+    if pProgramacion>=6 and pTrabajoEquipo>=7 and pOrden>=4 and pCreatividad>=7 and telefono % 2 == 1 and ocupacion==1:
+        cargo=str("Desarrollador")
+
+    elif pProgramacion>=0 and pTrabajoEquipo>=6 and pOrden>=7 and pCreatividad>=2 and telefono % 2 == 1 and ocupacion==2:
+        cargo=str("Administrador")
+
+    elif pProgramacion>=2 and pTrabajoEquipo>=6 and pOrden>=8 and pCreatividad>=3 and telefono % 2 == 1 and ocupacion==3:
+        cargo=str("Controlador de Recursos")
+
+    elif pProgramacion>=0 and pTrabajoEquipo>=6 and pOrden>=7 and pCreatividad>=2 and telefono % 2 == 1 and ocupacion==4:
+        cargo=str("Recursos Humanos")
+    else:
+        cargo = str("")
+
+    return cargo
 
 def sector_administrativo_oficinas():
     global login, dineroDisponibleInicial, sueldoBasico
@@ -111,7 +135,7 @@ def sector_administrativo_oficinas():
         print(
             "\n[ MENÚ SECTOR ADMINISTRATIVO (oficinas)]:\n\n[1] Sueldos\n[2] Gastos varios\n[3] Proyectos vendidos\n[4] Cerrar sesión")
 
-        opc = int(input("\n\n-➤  "))
+        opc = int(input("\n\n->   "))
 
         if opc == 1:
             print("Sueldos.")
@@ -147,7 +171,7 @@ def sector_administrativo_oficinas():
                     print("No se le puede pagar al empleado.")
 
                 continuarEmpleados = int(
-                    input("\n¿Quiere continuar cargando empleados?\n\n[1] Sí\n[2] No\n\n-➤  "))
+                    input("\n¿Quiere continuar cargando empleados?\n\n[1] Sí\n[2] No\n\n->  "))
 
         elif opc == 2:
             continuarGastos = 1
@@ -164,7 +188,7 @@ def sector_administrativo_oficinas():
                     f'Dinero antes de la compra: $ {dineroDisponibleInicial}\nDinero a gastar: ${montoArticulo}\nDinero final: ${dineroDisponibleInicial-montoArticulo}\n\nGasto total: {totalGasto}')
                 dineroDisponibleInicial -= montoArticulo
                 continuarGastos = int(
-                    input("\n¿Quiere continuar ingresando artículos?\n\n[1] Sí\n[2] No\n\n-➤  "))
+                    input("\n¿Quiere continuar ingresando artículos?\n\n[1] Sí\n[2] No\n\n->  "))
 
         elif opc == 3:
             continuarProyectos = 1
@@ -179,7 +203,7 @@ def sector_administrativo_oficinas():
                 dineroDisponibleInicial += montoProyecto
 
                 continuarProyectos = int(
-                    input("\n¿Quiere continuar ingresando proyectos?\n\n[1] Sí\n[2] No\n\n-➤  "))
+                    input("\n¿Quiere continuar ingresando proyectos?\n\n[1] Sí\n[2] No\n\n->  "))
 
         elif opc == 4:
             cerrar_sesion()
@@ -193,7 +217,7 @@ def sector_administrativo_recepcion():
         print(
             "\n[ MENÚ SECTOR ADMINISTRATIVO (recepción)]:\n\n[1] Calcular empleados\n[2] Cerrar sesión")
 
-        opc = int(input("\n-➤  "))
+        opc = int(input("\n->  "))
 
         if opc == 1:
             continuarCalcEmpleados = 1
@@ -241,7 +265,7 @@ def sector_administrativo_recepcion():
                       totalEmpleados)
 
                 continuarCalcEmpleados = int(
-                    input("\n¿Quiere continuar calculando empleados? \n\n[1] Sí\n[2] No\n\n-➤  "))
+                    input("\n¿Quiere continuar calculando empleados? \n\n[1] Sí\n[2] No\n\n->  "))
         elif opc == 2:
             cerrar_sesion()
 
@@ -254,7 +278,7 @@ def desarrolladores():
         print(
             "\n[ MENÚ DESARROLLADORES ]:\n\n[1] Calcular prioridades\n[2] Cerrar sesión")
 
-        opc = int(input("\n-➤  "))
+        opc = int(input("\n->  "))
 
         if opc == 1:
             continuarCalcPrioridades = 1
@@ -275,26 +299,27 @@ def desarrolladores():
                     tareas = int(
                         input(f'Ingrese la cantidad de tareas a realizar (proyecto {proyecto+1}): '))
 
+
                     puntos = calcular_puntos(semanas, paga, modulos, tareas)
 
-                    listaPuntajes.append([puntos, proyecto])
+                    listaPuntajes.append(puntos)
+                    listaProyectos.append(proyecto)
 
                 for punto in listaPuntajes:
                     for punto2 in range(len(listaPuntajes) - 1):
-                        if listaPuntajes[punto2][0] > listaPuntajes[punto2+1][0]:
-                            listaPuntajes[punto2][0] = listaPuntajes[punto2+1][0]
-                            listaPuntajes[punto2 +
-                                          1][0] = listaPuntajes[punto2][0]
+                        if listaPuntajes[punto2] > listaPuntajes[punto2+1]:
+                            listaPuntajes[punto2] = listaPuntajes[punto2+1]
+                            listaPuntajes[punto2+1] = listaPuntajes[punto2]
 
                 clear()
+                print(listaPuntajes)
                 print(
-                    f'Órden de prioridades:\n\n1# {listaPuntajes[2][0]} (proyecto {listaPuntajes[2][1]+1})\n2# {listaPuntajes[1][0]} (proyecto {listaPuntajes[1][1]+1})\n3# {listaPuntajes[0][0]} (proyecto {listaPuntajes[0][1]+1})')
+                    f'Órden de prioridades:\n\n1# {listaPuntajes[2]} (proyecto {listaPuntajes[2]})\n2# {listaPuntajes[1][0]} (proyecto {listaPuntajes[1][1]+1})\n3# {listaPuntajes[0][0]} (proyecto {listaPuntajes[0][1]+1})')
                 continuarCalcPrioridades = int(
-                    input("\n¿Quiere continuar calculando prioridades?\n\n[1] Sí\n[2] No\n\n-➤  "))
+                    input("\n¿Quiere continuar calculando prioridades?\n\n[1] Sí\n[2] No\n\n->  "))
 
         elif opc == 2:
             cerrar_sesion()
-
 
 def gerentes():
     continuar = 1
@@ -304,7 +329,7 @@ def gerentes():
         print(
             "\nOpciones:\n\n[1] Calcular prioridades\n[2] Calcular prioridades\n[3] Calcular prioridades\n[4] Calcular prioridades\n[5] Cerrar sesión")
 
-        opc = int(input("\n-➤  "))
+        opc = int(input("\n->  "))
 
         if opc == 1:
             pass
@@ -313,8 +338,53 @@ def gerentes():
 
 
 def recursos_humanos():
-    pass
+    continuar = 1
 
+    while continuar == 1 and login != []:
+
+        clear()
+        print(
+            "\n[ MENÚ RECURSOS HUMANOS ]:\n\n[1] Ingresar postulantes\n[2] Cerrar sesión")
+
+        opc = int(input("\n->  "))
+
+        if opc == 1:
+            clear()
+            postulantes = int(input("Ingrese la cantidad de postulantes: "))
+
+            for postulante in range(postulantes):
+                clear()
+                ocupacion=int(input("Puesto a ocupar: \n[1] Desarrollador \n[2] Administrador \n[3] Control de recursos \n[4] Recursos Humanos\n\n-> "))
+                clear()
+                telefono=int(input("Ingrese su numero de telefono: "))
+
+                print("\nIngrese los puntajes del 0 al 10: ")
+
+                pProgramacion=int(input("Puntaje en Programacion: "))
+                pTrabajoEquipo=int(input("Puntaje en Trabajo en Equipo: "))
+                pOrden=int(input("Puntaje de Orden: "))
+                pCreatividad=int(input("Puntaje de Creatividad: "))
+
+                cargo=cargo_a_ocupar(pProgramacion,pTrabajoEquipo,pOrden,pCreatividad,telefono,ocupacion)
+                if cargo != "":
+                    print(f"Se puede ocupar el cargo de {cargo}.")
+                else:
+                    print("\nNo se puede ocupar el cargo.\n")
+
+                if postulante+1 == postulantes or postulante == postulantes:
+                    input("Enter para continuar...")
+                    break
+                else:
+                    ans = int(input("¿Quiere continuar con el otro postulante?\n\n[1] Sí\n[2] No\n\n-> "))
+
+                    if ans == 1:
+                        pass
+                    else:
+                        break
+                        break
+        elif opc == 2:
+            cerrar_sesion()
+        
 
 def control_de_recursos():
     pass
