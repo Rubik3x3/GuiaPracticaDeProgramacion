@@ -475,6 +475,11 @@ def control_de_recursos():
                 if opc == 1:
                     clear()
                     cajas=int(input("\nIngrese cuantas cajas piden: "))
+                    capacidadOcupadaTotal+=cajas
+                    capacidadPorDeposito+=cajas//3
+
+                    cantidadDisponibleTotal = (espacioDisponible*3)-capacidadOcupadaTotal
+                    cantidadDisponiblePorDeposito = espacioDisponible // cantidadDisponibleTotal
                     estado=pedido_de_cajas(cajas,espacioDisponible)
 
                     print(f"\n{estado}")
