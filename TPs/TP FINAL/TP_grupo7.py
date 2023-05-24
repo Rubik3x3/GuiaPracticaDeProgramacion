@@ -27,11 +27,17 @@ gastosTotales = int(0)
 sueldoMasBajo = int(0)
 sueldoMasAlto = int(0)
 
-horarioMayorCantEmpleadosOrganizacion = ""
+horarioMayorCantEmpleadosOrganizacion = [0,""]
 
 proyectoMasPrioridad = int(0)
 
+cantidadEmpleadosAceptados = int(0)
+cantidadEmpleadosRechazados = int(0)
 
+capacidadOcupadaTotal = int(0)
+capacidadPorDeposito = int(0)
+cantidadDisponibleTotal = int(0)
+cantidadDisponiblePorDeposito = int(0)
 
 login = []
 
@@ -48,8 +54,6 @@ def clear():
 
 
 def login():
-    global login
-    login = []
 
     logueado = False
     while logueado == False:
@@ -91,12 +95,7 @@ def login():
 
 
 def cerrar_sesion():
-    global login
-    login = []
-    if os.name == "nt":
-        os.system("python TP_grupo7.py")
-    else:
-        os.system("python3 TP_grupo7.py")
+    login()
 
 
 def calcular_puntos(semanas, paga, modulos, tareas):
@@ -126,27 +125,32 @@ def cargo_a_ocupar(pProgramacion,pTrabajoEquipo,pOrden,pCreatividad,telefono,ocu
 
     return cargo
 
-def pedido(cajas):
-    if cajas>espacioD:
-        cajas=cajas/2
-        if cajas>espacioD:
-            ocu=str("Pedido rechazado.")
+def pedido_de_cajas(cCajas,espacioDisponible):
+    if cCajas > espacioDisponible:
+        cCajas = cCajas // 2
+        if cCajas > espacioDisponible:
+            estado = str("Pedido rechazado.")
         else:
-            ocu=str("Se realizo el pedido.")
-    return ocu
-def envio(cajas):
-    cajas=int(input("Cantidad de cajas Disponibles: "))
-    envi=int(input("Cantidad de cajas a enviar: "))
-    if envi>cajas:
-        envi=int(0)
-        ocu=str("no se pudo realizar.")
-    elif envi<=cajas and envi>0:
-        cajas=cajas-envi
-        ocu=str("se realizo exitosamente.")
-    return ocu
+            estado = str("Se realizo el pedido.")
+    else:
+        estado = str("Se realizo el pedido.")
+    return estado
+
+def envio_de_cajas(cCajas):
+    cajasAEnviar=int(input("Cantidad de cajas a enviar: "))
+
+    if cajasAEnviar > cCajas:
+        cajasAEnviar = int(0)
+        estado = str("no se pudo realizar")
+
+    elif cajasAEnviar <= cCajas and cajasAEnviar > 0:
+        cCajas = cCajas - cajasAEnviar
+        estado = str("se realizo")
+
+    return estado
 
 def sector_administrativo_oficinas():
-    global login, dineroDisponibleInicial, sueldoBasico
+    global login, dineroDisponibleInicial, sueldoBasico,sueldoMasBajo,sueldoMasAlto
 
     continuar = 1
     while continuar == 1 and login != []:
@@ -155,7 +159,7 @@ def sector_administrativo_oficinas():
             "\n[ MENÚ SECTOR ADMINISTRATIVO (oficinas)]:\n\n[1] Sueldos\n[2] Gastos varios\n[3] Proyectos vendidos\n[4] Cerrar sesión")
 
         opc = int(input("\n\n->   "))
-
+        cuenta = 0
         if opc == 1:
             print("Sueldos.")
             continuarEmpleados = 1
@@ -179,6 +183,14 @@ def sector_administrativo_oficinas():
                 elif puestoEmpleado == "CEO":
                     sueldoFinal = (sueldoBasico*9.8)+plusEmpleado
 
+                if cuenta == 0:
+                    sueldoMasBajo = sueldoFinal
+                else:
+                    if sueldoMasBajo > sueldoFinal:
+                        sueldoMasBajo = sueldoFinal
+                    if sueldoMasAlto < sueldoFinal:
+                        sueldoMasAlto = sueldoFinal
+
                 clear()
 
                 print("Sueldo: $", sueldoFinal)
@@ -191,6 +203,7 @@ def sector_administrativo_oficinas():
 
                 continuarEmpleados = int(
                     input("\n¿Quiere continuar cargando empleados?\n\n[1] Sí\n[2] No\n\n->  "))
+                cuenta += 1
 
         elif opc == 2:
             continuarGastos = 1
@@ -200,7 +213,7 @@ def sector_administrativo_oficinas():
                 print("Gastos vendidos.")
                 tipoArticulo = str(input("Ingrese el tipo de artículo: "))
                 montoArticulo = int(input("Ingrese el monto del artículo: "))
-
+                gastosTotales += montoArticulo
                 totalGasto += montoArticulo
 
                 print(
@@ -216,6 +229,8 @@ def sector_administrativo_oficinas():
                 nombreProyecto = str(input("Ingrese el nombre del proyecto: "))
                 montoProyecto = str(input("Ingrese el monto del proyecto: "))
 
+                ingresosTotales += montoProyecto
+
                 print(
                     f'Dinero inicial: ${dineroDisponibleInicial}\nDinero final: ${dineroDisponibleInicial+montoProyecto}')
 
@@ -229,6 +244,7 @@ def sector_administrativo_oficinas():
 
 
 def sector_administrativo_recepcion():
+    global horarioMayorCantEmpleadosOrganizacion
     continuar = 1
 
     while continuar == 1 and login != []:
@@ -272,6 +288,10 @@ def sector_administrativo_recepcion():
                           empleadosEnLaOrganizacion)
                     print(
                         "En la hora ", horas[i], ":\nEntran: ", entran[i], "\nSalen: ", salen[i])
+
+                    if horarioMayorCantEmpleadosOrganizacion[0] < empleadosEnLaOrganizacion:
+                        horarioMayorCantEmpleadosOrganizacion[1] = horas[i]
+
 
                 clear()
 
@@ -321,8 +341,7 @@ def desarrolladores():
 
                     puntos = calcular_puntos(semanas, paga, modulos, tareas)
 
-                    listaPuntajes.append(puntos)
-                    listaProyectos.append(proyecto)
+                    listaPuntajes.append([puntos,proyecto])
 
                 for punto in listaPuntajes:
                     for punto2 in range(len(listaPuntajes) - 1):
@@ -333,30 +352,53 @@ def desarrolladores():
                 clear()
                 print(listaPuntajes)
                 print(
-                    f'Órden de prioridades:\n\n1# {listaPuntajes[2]} (proyecto {listaPuntajes[2]})\n2# {listaPuntajes[1][0]} (proyecto {listaPuntajes[1][1]+1})\n3# {listaPuntajes[0][0]} (proyecto {listaPuntajes[0][1]+1})')
+                    f'Órden de prioridades:\n\n1# {listaPuntajes[2][0]} (proyecto {listaPuntajes[2][1]})\n2# {listaPuntajes[1][0]} (proyecto {listaPuntajes[1][1]+1})\n3# {listaPuntajes[0][0]} (proyecto {listaPuntajes[0][1]+1})')
                 continuarCalcPrioridades = int(
                     input("\n¿Quiere continuar calculando prioridades?\n\n[1] Sí\n[2] No\n\n->  "))
+                proyectoMasPrioridad = listaPuntajes[2][0]
 
         elif opc == 2:
             cerrar_sesion()
 
 def gerentes():
+    global ingresosTotales,gastosTotales,sueldoMasBajo,sueldoMasAlto,horarioMayorCantEmpleadosOrganizacion,proyectoMasPrioridad,cantidadEmpleadosAceptados,cantidadEmpleadosRechazados,capacidadOcupadaTotal,capacidadPorDeposito,cantidadDisponibleTotal,cantidadDisponiblePorDeposito
     continuar = 1
 
     while continuar == 1 and login != []:
         clear()
         print(
-            "\nOpciones:\n\n[1] Calcular prioridades\n[2] Calcular prioridades\n[3] Calcular prioridades\n[4] Calcular prioridades\n[5] Cerrar sesión")
+            "\n[ MENÚ GERENTES ]\nVer estadísticas de:\n\n[1] Administrativo (oficinas)\n[2] Administrativo (recepción)\n[3] Desarrollador\n[4] Recursos Humanos\n[5] Recursos\n[6] Cerrar sesión")
 
         opc = int(input("\n->  "))
 
         if opc == 1:
-            pass
+            print(f'Ingresos: $',ingresosTotales)
+            print(f'Gastos: $',gastosTotales)
+            print(f'Dinero disponible: $',dineroDisponibleInicial)
+            print(f'Sueldo mas bajo: $',sueldoMasBajo)
+            print(f'Sueldo mas alto: $',sueldoMasAlto)
+            input("\nEnter para continuar...")
+        elif opc == 2:
+            print("Horario donde se registro la mayor cantidad de empleados en la organizacion: ",horarioMayorCantEmpleadosOrganizacion[1])
+            input("\nEnter para continuar...")
+        elif opc == 3:
+            print(f'Proyecto con mayor prioridad: {proyectoMasPrioridad}')
+            input("\nEnter para continuar...")
+        elif opc == 4:
+            print(f'\nCantidad de empleados aceptados: {cantidadEmpleadosAceptados}\nCantidad de empleados rechazados: {cantidadEmpleadosRechazados}')
+            input("\nEnter para continuar...")
         elif opc == 5:
+            print("Capacidad ocupada en total:",capacidadOcupadaTotal)
+            print("Capacidad por depósito: ",capacidadPorDeposito)
+            print("Cantidad disponible en total: ",cantidadDisponibleTotal)
+            print("Cantidad disponible por depósito: ",cantidadDisponiblePorDeposito)
+            input("\nEnter para continuar...")
+        elif opc == 6:
             cerrar_sesion()
 
 
 def recursos_humanos():
+    global cantidadEmpleadosAceptados,cantidadEmpleadosRechazados
     continuar = 1
 
     while continuar == 1 and login != []:
@@ -377,8 +419,6 @@ def recursos_humanos():
                 clear()
                 telefono=int(input("Ingrese su numero de telefono: "))
 
-                print("\nIngrese los puntajes del 0 al 10: ")
-
                 pProgramacion=int(input("Puntaje en Programacion: "))
                 pTrabajoEquipo=int(input("Puntaje en Trabajo en Equipo: "))
                 pOrden=int(input("Puntaje de Orden: "))
@@ -387,8 +427,12 @@ def recursos_humanos():
                 cargo=cargo_a_ocupar(pProgramacion,pTrabajoEquipo,pOrden,pCreatividad,telefono,ocupacion)
                 if cargo != "":
                     print(f"Se puede ocupar el cargo de {cargo}.")
+                    cantidadEmpleadosAceptados += 1
+                    print(cantidadEmpleadosAceptados)
                 else:
                     print("\nNo se puede ocupar el cargo.\n")
+                    cantidadEmpleadosRechazados += 1
+                    print(cantidadEmpleadosRechazados)
 
                 if postulante+1 == postulantes or postulante == postulantes:
                     input("Enter para continuar...")
@@ -406,6 +450,7 @@ def recursos_humanos():
         
 
 def control_de_recursos():
+    global capacidadOcupadaTotal,capacidadPorDeposito,cantidadDisponibleTotal,cantidadDisponiblePorDeposito
     continuar = 1
 
     while continuar == 1 and login != []:
@@ -416,30 +461,40 @@ def control_de_recursos():
 
         ans = int(input("\n->  "))
 
-        continuarDepositos = 1
+        if ans == 1:
+            continuarDepositos = 1
 
-        while continuarDepositos==1:
-            espacioDisponible=int(input("Ingrese espacio disponible por deposito: "))
+            while continuarDepositos==1:
+                clear()
+                espacioDisponible=int(input("Ingrese espacio disponible por deposito: "))
 
-            print("Opciones:\n\n[1] Recibir pedidos \n[2] Realizar envios\n")
-            opc = int(input("\n->  "))
+                print("\nOpciones:\n\n[1] Recibir pedidos \n[2] Realizar envios")
 
-            if opc == 1:
-                cajas=int(input("\nIngrese cuantas cajas piden: "))
-                ocu=pedido(cajas)
+                opc = int(input("\n->  "))
 
-            if opc == 2:
-                hayStock = int(input("¿Hay cajas disponibles? \n[1] Si \n[2] No\n\n-> "))
+                if opc == 1:
+                    clear()
+                    cajas=int(input("\nIngrese cuantas cajas piden: "))
+                    estado=pedido_de_cajas(cajas,espacioDisponible)
 
-                if hayStock == 1:
-                    ocu=envio(cajas)
+                    print(f"\n{estado}")
 
-                print(f"\nEl envio {ocu}")
+                elif opc == 2:
+                    clear()
+                    hayStock = int(input("¿Hay cajas disponibles?\n\n[1] Si \n[2] No\n\n-> "))
 
-            continuarDepositos=int(input("\n¿Queres continuar manejando el depósito? \n[1] Si \n[2] No \n\n-> "))
+                    if hayStock == 1:
+                        cajas=int(input("\nIngrese la cantidad de cajas: "))
+                        estado=envio_de_cajas(cajas)
 
-            while continuarDepositos < 1 or continuarDepositos > 2:
-                continuarDepositos=int(input("¿Queres continuar manejando el depósito? \n[1] Si \n[2] No \n\n-> "))
+                        print(f"\nEl envio {estado}.")
+
+                continuarDepositos=int(input("\n¿Queres continuar manejando el depósito?\n\n[1] Si \n[2] No \n\n-> "))
+
+                while continuarDepositos < 1 or continuarDepositos > 2:
+                    continuarDepositos=int(input("¿Queres continuar manejando el depósito?\n\n[1] Si \n[2] No \n\n-> "))
+        elif ans == 2:
+            cerrar_sesion()
 
 # Selector de area por número de area
 def areas(area):
