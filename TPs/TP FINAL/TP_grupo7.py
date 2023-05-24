@@ -22,6 +22,9 @@ userControlDeRecursos = ["user6", "pass6", 6, "Control de Recursos"]
 usuariosTOTALES = [userSecAdministrativoOficinas, userSecAdministrativoRecepcion,
                    userDesarrolladores, userGerentes, userRRHH, userControlDeRecursos]
 
+
+datosGerentes = []
+
 login = []
 
 # Limpia la pantalla
@@ -79,7 +82,7 @@ def login():
 # Termina el programa y lo vuelve a iniciar
 
 
-def cerrarSesion():
+def cerrar_sesion():
     global login
     login = []
     if os.name == "nt":
@@ -179,7 +182,7 @@ def sector_administrativo_oficinas():
                     input("\n¿Quiere continuar ingresando proyectos?\n\n[1] Sí\n[2] No\n\n-➤  "))
 
         elif opc == 4:
-            cerrarSesion()
+            cerrar_sesion()
 
 
 def sector_administrativo_recepcion():
@@ -240,7 +243,7 @@ def sector_administrativo_recepcion():
                 continuarCalcEmpleados = int(
                     input("\n¿Quiere continuar calculando empleados? \n\n[1] Sí\n[2] No\n\n-➤  "))
         elif opc == 2:
-            cerrarSesion()
+            cerrar_sesion()
 
 
 def desarrolladores():
@@ -290,7 +293,7 @@ def desarrolladores():
                     input("\n¿Quiere continuar calculando prioridades?\n\n[1] Sí\n[2] No\n\n-➤  "))
 
         elif opc == 2:
-            cerrarSesion()
+            cerrar_sesion()
 
 
 def gerentes():
@@ -306,7 +309,7 @@ def gerentes():
         if opc == 1:
             pass
         elif opc == 5:
-            cerrarSesion()
+            cerrar_sesion()
 
 
 def recursos_humanos():
