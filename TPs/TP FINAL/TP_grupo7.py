@@ -46,13 +46,13 @@ def login():
         logueado = False
         usuarioFinal = []
         acumuladorUsuarios = 0
-
+        print("[ Proyecto Gestión Interna - Unicron S.A ] LOGIN\n")
         userLogueado = str(input("Ingresar el Usuario: "))
 
         for usuario in usuariosTOTALES:
             if usuario[0] == userLogueado:
                 clear()
-
+                print("[ Proyecto Gestión Interna - Unicron S.A ] LOGIN\n")
                 print("Usuario: ", userLogueado, sep="")
 
                 passLogueada = str(input("Ingresar la Contraseña: "))
@@ -106,9 +106,9 @@ def sector_administrativo_oficinas():
     while continuar == 1 and login != []:
         clear()
         print(
-            "\nOpciones:\n\n[1] Sueldos\n[2] Gastos varios\n[3] Proyectos vendidos\n[4] Cerrar sesión")
+            "\n[ MENÚ SECTOR ADMINISTRATIVO (oficinas)]:\n\n[1] Sueldos\n[2] Gastos varios\n[3] Proyectos vendidos\n[4] Cerrar sesión")
 
-        opc = int(input("\nOpción seleccionada: "))
+        opc = int(input("\n\n-➤  "))
 
         if opc == 1:
             print("Sueldos.")
@@ -144,7 +144,7 @@ def sector_administrativo_oficinas():
                     print("No se le puede pagar al empleado.")
 
                 continuarEmpleados = int(
-                    input("\n¿Quiere continuar cargando empleados? [1] Sí - [2] No : "))
+                    input("\n¿Quiere continuar cargando empleados?\n\n[1] Sí\n[2] No\n\n-➤  "))
 
         elif opc == 2:
             continuarGastos = 1
@@ -161,7 +161,7 @@ def sector_administrativo_oficinas():
                     f'Dinero antes de la compra: $ {dineroDisponibleInicial}\nDinero a gastar: ${montoArticulo}\nDinero final: ${dineroDisponibleInicial-montoArticulo}\n\nGasto total: {totalGasto}')
                 dineroDisponibleInicial -= montoArticulo
                 continuarGastos = int(
-                    input("\n¿Quiere continuar ingresando artículos? [1] Sí - [2] No : "))
+                    input("\n¿Quiere continuar ingresando artículos?\n\n[1] Sí\n[2] No\n\n-➤  "))
 
         elif opc == 3:
             continuarProyectos = 1
@@ -187,7 +187,8 @@ def sector_administrativo_recepcion():
 
     while continuar == 1 and login != []:
         clear()
-        print("\nOpciones:\n\n[1] Calcular empleados\n[2] Cerrar sesión")
+        print(
+            "\n[ MENÚ SECTOR ADMINISTRATIVO (recepción)]:\n\n[1] Calcular empleados\n[2] Cerrar sesión")
 
         opc = int(input("\n-➤  "))
 
@@ -205,7 +206,7 @@ def sector_administrativo_recepcion():
                          "13:00hs", "14:00hs", "15:00hs", "16:00hs", "17:00hs", "18:00hs", "19:00hs", "20:00hs"]
 
                 for i in range(15):
-                    os.system("cls")
+                    clear()
                     print(
                         "\nIngrese la cantidad de empleados que entran en la hora: ", horas[i], "\n")
                     iEntran = int(input())
@@ -226,14 +227,15 @@ def sector_administrativo_recepcion():
                     print(
                         "En la hora ", horas[i], ":\nEntran: ", entran[i], "\nSalen: ", salen[i])
 
-                os.system("cls")
+                clear()
 
                 for i in range(15):
                     print("\nA las ", horas[i], " entran ",
                           entran[i], " empleados y salen ", salen[i])
                     print("Empleados en la organizacion: ",
                           empleadosPorHora[i])
-                    print("Empleados totales de la organizacion: ", totalEmpleados)
+                print("\n>> Empleados totales de la organizacion: ",
+                      totalEmpleados)
 
                 continuarCalcEmpleados = int(
                     input("\n¿Quiere continuar calculando empleados? \n\n[1] Sí\n[2] No\n\n-➤  "))
@@ -246,7 +248,8 @@ def desarrolladores():
 
     while continuar == 1 and login != []:
         clear()
-        print("\nOpciones:\n\n[1] Calcular prioridades\n[2] Cerrar sesión")
+        print(
+            "\n[ MENÚ DESARROLLADORES ]:\n\n[1] Calcular prioridades\n[2] Cerrar sesión")
 
         opc = int(input("\n-➤  "))
 
@@ -291,7 +294,19 @@ def desarrolladores():
 
 
 def gerentes():
-    pass
+    continuar = 1
+
+    while continuar == 1 and login != []:
+        clear()
+        print(
+            "\nOpciones:\n\n[1] Calcular prioridades\n[2] Calcular prioridades\n[3] Calcular prioridades\n[4] Calcular prioridades\n[5] Cerrar sesión")
+
+        opc = int(input("\n-➤  "))
+
+        if opc == 1:
+            pass
+        elif opc == 5:
+            cerrarSesion()
 
 
 def recursos_humanos():
