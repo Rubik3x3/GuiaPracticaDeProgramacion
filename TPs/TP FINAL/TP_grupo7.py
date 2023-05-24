@@ -126,6 +126,25 @@ def cargo_a_ocupar(pProgramacion,pTrabajoEquipo,pOrden,pCreatividad,telefono,ocu
 
     return cargo
 
+def pedido(cajas):
+    if cajas>espacioD:
+        cajas=cajas/2
+        if cajas>espacioD:
+            ocu=str("Pedido rechazado.")
+        else:
+            ocu=str("Se realizo el pedido.")
+    return ocu
+def envio(cajas):
+    cajas=int(input("Cantidad de cajas Disponibles: "))
+    envi=int(input("Cantidad de cajas a enviar: "))
+    if envi>cajas:
+        envi=int(0)
+        ocu=str("no se pudo realizar.")
+    elif envi<=cajas and envi>0:
+        cajas=cajas-envi
+        ocu=str("se realizo exitosamente.")
+    return ocu
+
 def sector_administrativo_oficinas():
     global login, dineroDisponibleInicial, sueldoBasico
 
@@ -387,11 +406,42 @@ def recursos_humanos():
         
 
 def control_de_recursos():
-    pass
+    continuar = 1
+
+    while continuar == 1 and login != []:
+
+        clear()
+        print(
+            "\n[ MENÚ CONTROL DE RECURSOS ]:\n\n[1] Manejar depósito\n[2] Cerrar sesión")
+
+        ans = int(input("\n->  "))
+
+        continuarDepositos = 1
+
+        while continuarDepositos==1:
+            espacioDisponible=int(input("Ingrese espacio disponible por deposito: "))
+
+            print("Opciones:\n\n[1] Recibir pedidos \n[2] Realizar envios\n")
+            opc = int(input("\n->  "))
+
+            if opc == 1:
+                cajas=int(input("\nIngrese cuantas cajas piden: "))
+                ocu=pedido(cajas)
+
+            if opc == 2:
+                hayStock = int(input("¿Hay cajas disponibles? \n[1] Si \n[2] No\n\n-> "))
+
+                if hayStock == 1:
+                    ocu=envio(cajas)
+
+                print(f"\nEl envio {ocu}")
+
+            continuarDepositos=int(input("\n¿Queres continuar manejando el depósito? \n[1] Si \n[2] No \n\n-> "))
+
+            while continuarDepositos < 1 or continuarDepositos > 2:
+                continuarDepositos=int(input("¿Queres continuar manejando el depósito? \n[1] Si \n[2] No \n\n-> "))
 
 # Selector de area por número de area
-
-
 def areas(area):
     if area == 1:
         sector_administrativo_oficinas()
