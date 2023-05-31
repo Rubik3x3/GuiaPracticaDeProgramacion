@@ -1,6 +1,6 @@
 # Guía Práctica de Programación
 ## Escuela Técnica Nº36 DE 15
-### Lenguaje de programación e IDEs:
+### Lenguaje de programación y editor de texto:
 
 ![Python](https://img.shields.io/badge/python-151515?style=for-the-badge&logo=python&logoColor=fff)
 ![Sublime Text](https://img.shields.io/badge/sublime_text-%23ffffff.svg?style=for-the-badge&logo=sublime-text&logoColor=000000)
