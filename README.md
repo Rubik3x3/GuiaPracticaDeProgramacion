@@ -1,5 +1,5 @@
 # Guía Práctica de Programación
-## Escuela Técnica Nº36 DE 15
+## Escuela Técnica Nº36 DE 15 (3er año)
 ### Lenguaje de programación:
 
 ![Python](https://img.shields.io/badge/python-151515?style=for-the-badge&logo=python&logoColor=fff)
